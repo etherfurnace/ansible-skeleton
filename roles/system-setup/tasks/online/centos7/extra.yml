@@ -4,12 +4,14 @@
 - name: 安装开发者工具包
   yum: name='@Development Tools' state=latest  
 
-- name: 安装Git
-  yum: name='git' state=latest  
+- name: 安装常用工具
+  yum: name='{{item.pkg}}' state=latest  
+  with_items:
+      - {pkg: 'git'}
+      - {pkg: 'htop'}
+      - {pkg: 'wget'}
+      - {pkg: 'net-tools'}
 
 - name: 安装Supervisor
   yum: name='supervisor' state=latest 
   notify: enable-supervisor
-
-- name: 安装HTOP
-  yum: name=htop state=latest  
