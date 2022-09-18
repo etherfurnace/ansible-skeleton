@@ -1,0 +1,11 @@
+#localhost ansible_connection=local
+# name ansible_ssh_host=ip ansible_ssh_user=name hostname=name
+
+#[group]
+#[group:vars]
+
+#[all:vars]
+#local_network=10.11.0.0/16
+#ansible_path=/data/ansible-skeleton
+#ansible_ssh_user=
+#ansible_ssh_pass=
