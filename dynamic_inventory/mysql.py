@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python3
 import argparse
 import configparser
 import os
@@ -163,7 +163,7 @@ class MySQLInventory(object):
 
         # cleanup output
         for group in self.inventory:
-            if not self.inventory[group]['hosts']:
+            if 'hosts' in self.inventory[group]:
                 del self.inventory[group]['hosts']
 
         self.write_to_cache(self.cache, self.cache_path_cache)
