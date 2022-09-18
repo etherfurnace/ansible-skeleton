@@ -67,7 +67,7 @@ class MySQLInventory(object):
         """ Reads the settings from the mysql.ini file """
 
         config = configparser.ConfigParser()
-        config.read(os.path.dirname(os.path.realpath(__file__)) + '/mysql.ini')
+        config.read('./inventory_plugins/mysql.ini')
 
         self.myconfig = dict(config.items('server'))
         if 'port' in self.myconfig:
