@@ -11,8 +11,6 @@ try:
 except ImportError:
     import simplejson as json
 
-from six import iteritems
-
 class MySQLInventory(object):
 
     def __init__(self):
