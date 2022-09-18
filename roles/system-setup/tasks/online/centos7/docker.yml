@@ -1,0 +1,32 @@
+- name: 创建Docker配置文件目录
+  file: path=/etc/docker state=directory
+
+- name: 下发Docker Daemon配置文件
+  template: 
+      src: docker/daemon.json
+      dest: /etc/docker
+
+- name: 下发Systemd文件
+  copy: 
+      src: docker/docker.service
+      dest: /usr/lib/systemd/system/
+
+- name: 下载Docker
+  unarchive: 
+      src: https://mirrors.cloud.tencent.com/docker-ce/linux/static/stable/x86_64/docker-19.03.9.tgz
+      dest: /tmp
+      remote_src: yes
+
+- name: 移动Docker文件
+  raw: mv /tmp/docker/* /usr/local/bin/
+
+- name: 启用Docker
+  service: enabled=yes name=docker pattern=docker state=started
+
+- name: 下载Docker-Compose
+  get_url:
+    url: "https://github.91chi.fun/https://github.com//docker/compose/releases/download/v2.10.2/docker-compose-linux-x86_64"
+    dest: /usr/local/bin/docker-compose
+    mode: 0777
+    force: yes
+    validate_certs: no

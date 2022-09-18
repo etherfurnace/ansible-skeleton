@@ -1,6 +1,8 @@
 #localhost ansible_connection=local
 # name ansible_ssh_host=ip ansible_ssh_user=name hostname=name
 
+10.11.25.48 ansible_ssh_user=root install_mode=dev
+
 #[group]
 #[group:vars]
 

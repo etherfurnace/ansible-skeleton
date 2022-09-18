@@ -1,0 +1,42 @@
+- name: 创建软件目录
+  file: path=/data/soft state=directory
+
+- name: 创建GoPath
+  file: path=/data/storage/gopath state=directory
+
+- name: 安装Golang
+  unarchive: 
+      src: https://dl.google.com/go/go1.18.linux-amd64.tar.gz
+      dest: /data/soft
+      remote_src: yes
+
+- name: 设置GOPATH环境变量
+  lineinfile: 
+      dest: /etc/profile
+      state: present
+      regexp: '^GO_PATH='
+      line: "GO_PATH=/data/storage/gopath"
+
+- name: 设置GOROOT环境变量
+  lineinfile: 
+      dest: /etc/profile
+      state: present
+      regexp: '^GO_ROOT='
+      line: "GO_ROOT=/data/soft/go"
+
+- name: 设置GOCACHE
+  lineinfile: 
+      dest: /etc/profile
+      state: present
+      regexp: '^GOCACHE='
+      line: "GOCACHE=/tmp"     
+
+- name: 更新PATH环境变量
+  lineinfile: 
+      dest: /etc/profile
+      state: present
+      regexp: '^PATH(.*)GO_ROOT(.*)$'
+      line: "PATH=$PATH:$GO_ROOT/bin" 
+
+- name: 设置GOPROXY
+  script:  "scripts/golang-proxy.sh"

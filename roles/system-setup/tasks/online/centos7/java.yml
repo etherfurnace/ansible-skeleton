@@ -1,0 +1,4 @@
+- name: 安装Java
+  yum: name='{{item.pkg}}' state=latest  
+  with_items:
+      - {pkg: 'java-1.8.0-openjdk-devel'}

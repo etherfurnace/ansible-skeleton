@@ -1,0 +1,24 @@
+- name: 创建软件目录
+  file: path=/data/soft state=directory
+- name: 安装NodeJS
+  unarchive: 
+      src: https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz
+      dest: /data/soft
+      remote_src: yes
+
+- name: 设置NODE环境变量
+  lineinfile: 
+      dest: /etc/profile
+      state: present
+      regexp: '^NODE_HOME='
+      line: "NODE_HOME=/data/soft/node-v16.17.0-linux-x64"
+
+- name: 更新PATH环境变量
+  lineinfile: 
+      dest: /etc/profile
+      state: present
+      regexp: '^PATH(.*)NODE_HOME(.*)$'
+      line: "PATH=$PATH:$NODE_HOME/bin"
+
+- name: 更新NodeJS源为阿里源
+  script: nodejs/setup.sh

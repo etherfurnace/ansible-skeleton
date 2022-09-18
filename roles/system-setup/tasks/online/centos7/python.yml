@@ -1,0 +1,13 @@
+- name: 安装Python
+  yum: name='{{item.pkg}}' state=latest  
+  with_items:
+      - {pkg: 'python-devel'}
+      - {pkg: 'python3-devel'}
+      - {pkg: 'python-pip'}
+      - {pkg: 'python3-pip'}
+
+- name: 创建Pip源目录
+  file: path=~/.pip state=directory
+  
+- name: 更换源为国内源
+  copy: src=pip/pip.conf  dest=~/.pip/pip.conf

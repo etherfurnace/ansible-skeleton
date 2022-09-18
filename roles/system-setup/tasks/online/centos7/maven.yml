@@ -1,0 +1,27 @@
+- name: 创建软件目录
+  file: path=/data/soft state=directory
+
+- name: 安装Maven
+  unarchive: 
+      src: https://mirrors.cloud.tencent.com/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip
+      dest: /data/soft
+      remote_src: yes
+
+- name: 下发Setting文件
+  copy: 
+      src: maven/settings.xml
+      dest: /data/soft/apache-maven-3.6.3/conf
+
+- name: 设置MAVEN环境变量
+  lineinfile: 
+      dest: /etc/profile
+      state: present
+      regexp: '^MAVEN_HOME='
+      line: "MAVEN_HOME=/data/soft/apache-maven-3.6.3"
+
+- name: 更新PATH环境变量
+  lineinfile: 
+      dest: /etc/profile
+      state: present
+      regexp: '^PATH(.*)MAVEN_HOME(.*)$'
+      line: "PATH=$PATH:$MAVEN_HOME/bin"   

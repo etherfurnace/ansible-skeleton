@@ -1,0 +1,60 @@
+---
+- block:
+    - name: 系统基础设置
+      include_tasks: 
+        file: online/centos7/basic.yml
+        apply:
+          tags: basic
+      tags: always
+
+    - name: 安装开发者组件
+      include_tasks: 
+        file: online/centos7/extra.yml
+        apply:
+          tags: extra
+      tags: always
+
+    - name: 安装Python
+      include_tasks: 
+        file: online/centos7/python.yml
+        apply:
+          tags: python
+      tags: always
+
+    - name: 安装Java
+      include_tasks: 
+        file: online/centos7/java.yml
+        apply:
+          tags: java
+      tags: always
+
+    - name: 安装Golang
+      include_tasks: 
+        file: online/centos7/golang.yml
+        apply:
+          tags: golang
+      tags: always
+
+    - name: 安装Maven
+      include_tasks: 
+        file: online/centos7/maven.yml
+        apply:
+          tags: maven
+      tags: always
+      
+    - name: 安装NodeJS
+      include_tasks: 
+        file: online/centos7/nodejs.yml
+        apply:
+          tags: nodejs
+      tags: always
+
+    - name: 安装Docker
+      include_tasks: 
+        file: online/centos7/docker.yml
+        apply:
+          tags: docker
+      tags: always
+      
+  when: ansible_distribution=="CentOS" and ansible_distribution_major_version=="7" and install_mode=="dev"
+    

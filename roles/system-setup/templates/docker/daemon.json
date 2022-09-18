@@ -1,0 +1,14 @@
+{
+    "registry-mirrors": [
+        "https://wa4l0lwb.mirror.aliyuncs.com"
+    ],
+    "insecure-registries": [],
+    "max-concurrent-downloads": 10,
+    "log-driver": "json-file",
+    "log-level": "warn",
+    "log-opts": {
+        "max-size": "10m",
+        "max-file": "3"
+    },
+    "data-root": "{{DOCKER_DATA_PATH}}"
+}

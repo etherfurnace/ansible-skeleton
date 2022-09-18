@@ -1,0 +1,3 @@
+---
+- name: enable-supervisor
+  service: enabled=yes name=supervisord pattern=supervisord state=started

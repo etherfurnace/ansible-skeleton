@@ -1,0 +1,15 @@
+- name: 安装EPEL源
+  yum: name=epel-release state=latest  
+
+- name: 安装开发者工具包
+  yum: name='@Development Tools' state=latest  
+
+- name: 安装Git
+  yum: name='git' state=latest  
+
+- name: 安装Supervisor
+  yum: name='supervisor' state=latest 
+  notify: enable-supervisor
+
+- name: 安装HTOP
+  yum: name=htop state=latest  
